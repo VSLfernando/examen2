@@ -10,5 +10,6 @@ import java.util.Set;
 public interface EspecialidadServicio {
 
     public List<Especialidad> listarEspecialidades();
+    public void crearEspecialidad(EspecialidadDTO especialidadDTO);
 
 }

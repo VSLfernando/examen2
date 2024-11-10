@@ -8,6 +8,4 @@ import java.util.Set;
 
 public interface MedicoRepositorio extends JpaRepository<Medico, Long> {
     public abstract List<Medico> findAllById(Iterable<Long> ids);
-
-
 }
