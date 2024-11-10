@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio de Sesión</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Registro e Inicio de Sesión</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+
+                <!-- Pestaña desplegable para Usuarios -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Usuarios <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/medico}">Médicos</a></li>
+                        <li><a th:href="@{/pacientes}">Pacientes</a></li>
+                    </ul>
+                </li>
+
+                <!-- Botón de Especialidades Médicas -->
+                <li>
+                    <a th:href="@{/especialidad}">Especialidades Médicas</a>
+                </li>
+
+                <!-- Botón de Cerrar Sesión -->
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br><br>
+
+<div class="container">
+    <h2>Especialidad</h2>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 text-center">
+            <a href="#" th:href="@{/especialidad/nuevo}" class="btn btn-primary btn-block mb-3">
+                <span class="glyphicon glyphicon-plus"></span> Añadir
+            </a>
+        </div>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Especialidad</th>
+                <th>Descripcion</th>
+                <th>Médicos</th>  <!-- Nueva columna para los Médicos -->
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="especialidad: ${especialidades}">
+                <td th:text="${especialidad.id}">ID</td>
+                <td th:text="${especialidad.nombre}">Nombre</td>
+                <td th:text="${especialidad.descripcion}">Descripción</td>
+                <td>
+                    <ul>
+                        <li th:each="medico : ${especialidad.medicos}" th:text="${medico.nombre}">Nombre Médico</li>
+                    </ul>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<!-- Bootstrap JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>

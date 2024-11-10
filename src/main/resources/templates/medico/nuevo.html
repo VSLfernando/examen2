@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio de Sesión</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed"
+                    data-toggle="collapse" data-target="#navbar" aria-expanded="false"
+                    aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#" th:href="@{/}">Registro e Inicio de Sesión</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/logout}">Cerrar Sesión</a>
+                </li>
+                <!-- Pestaña desplegable para Usuarios -->
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                       aria-expanded="false">Usuarios <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a th:href="@{/medico}">Médicos</a></li>
+                        <li><a th:href="@{/pacientes}">Pacientes</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<br><br>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <div th:if="${param.exito}">
+                <div class="alert alert-info">
+                    Registro Exitoso
+                </div>
+            </div>
+            <h1>Registrar Medico</h1>
+            <form th:action="@{/medico/nuevo}" method="post" th:object="${medico}">
+                <div class="form-group">
+                    <label class="control-label" for="nombre">Nombre: </label>
+                    <input id="nombre" type="text" class="form-control" th:field="*{nombre}" required
+                           autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="apellido">Apellido: </label>
+                    <input id="apellido" class="form-control" th:field="*{apellido}" required autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label class=class="control-label" for="email">Email: </label>
+                    <input id="email" type="email" class="form-control" th:field="*{email}" required
+                           autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="telefono">Telefono: </label>
+                    <input id="telefono" type="number" class="form-control" th:field="*{telefono}" required
+                           autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="nro_matricula">Nro Matricula: </label>
+                    <input id="nro_matricula" type="number" class="form-control" th:field="*{nro_matricula}" required
+                           autofocus="autofocus">
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label" for="password">Password: </label>
+                    <input type="password" id="password" class="form-control" th:field="*{password}" required
+                           autofocus="autofocus">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a th:href="@{/medico}" class="btn btn-default">Cancelar</a>
+
+<!--                <div class="form-group">-->
+<!--                    <button type="submit" class="btn btn-success">Registrar</button>-->
+<!--                    <span> Si estas registrado <a th:href="@{/login}">inicia sesión aqui</a> </span>-->
+<!--                </div>-->
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- Bootstrap JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+        integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+</body>
+</html>
