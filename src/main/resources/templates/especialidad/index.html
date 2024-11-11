@@ -72,12 +72,13 @@
             <tr>
                 <th>ID</th>
                 <th>Especialidad</th>
-                <th>Descripcion</th>
-                <th>Médicos</th>  <!-- Nueva columna para los Médicos -->
+                <th>Descripción</th>
+                <th>Médicos</th> <!-- Columna para los Médicos -->
+                <th>Acciones</th> <!-- Nueva columna para las acciones -->
             </tr>
             </thead>
             <tbody>
-            <tr th:each="especialidad: ${especialidades}">
+            <tr th:each="especialidad : ${especialidades}">
                 <td th:text="${especialidad.id}">ID</td>
                 <td th:text="${especialidad.nombre}">Nombre</td>
                 <td th:text="${especialidad.descripcion}">Descripción</td>
@@ -86,10 +87,17 @@
                         <li th:each="medico : ${especialidad.medicos}" th:text="${medico.nombre}">Nombre Médico</li>
                     </ul>
                 </td>
+                <td>
+                    <!-- Botón para editar la especialidad -->
+                    <a th:href="@{/especialidad/editar/{id}(id=${especialidad.id})}" class="btn btn-warning btn-sm">
+                        <span class="glyphicon glyphicon-edit"></span> Editar
+                    </a>
+                </td>
             </tr>
             </tbody>
         </table>
     </div>
+
 </div>
 
 

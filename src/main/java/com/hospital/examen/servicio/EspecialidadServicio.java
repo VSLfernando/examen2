@@ -11,5 +11,9 @@ public interface EspecialidadServicio {
 
     public List<Especialidad> listarEspecialidades();
     public void crearEspecialidad(EspecialidadDTO especialidadDTO);
+    EspecialidadDTO obtenerEspecialidadPorId(Long id);
+    void actualizarEspecialidad(EspecialidadDTO especialidadDTO);
+    public EspecialidadDTO obtenerPorId(Long id);
+    public Especialidad guardarEspecialidad(Especialidad especialidad);
 
 }

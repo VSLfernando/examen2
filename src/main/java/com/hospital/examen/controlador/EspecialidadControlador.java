@@ -1,5 +1,6 @@
 package com.hospital.examen.controlador;
 
+import com.hospital.examen.modelo.Especialidad;
 import com.hospital.examen.modelo.Medico;
 import com.hospital.examen.modelo.dto.EspecialidadDTO;
 import com.hospital.examen.servicio.EspecialidadServicio;
@@ -7,10 +8,10 @@ import com.hospital.examen.servicio.MedicoServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 
@@ -45,5 +46,28 @@ public class EspecialidadControlador {
         especialidadServicio.crearEspecialidad(especialidadDTO);
         return "redirect:/especialidad"; // Redirigir a la lista de especialidades
     }
+
+    @GetMapping("/especialidad/editar/{id}")
+    public String mostrarFormularioEdicion(@PathVariable Long id, Model model) {
+        EspecialidadDTO especialidadDTO = especialidadServicio.obtenerPorId(id);
+        List<Medico> medicos = medicoServicio.listarMedicos();
+
+        // Obtener los IDs de los médicos ya seleccionados directamente del DTO
+        List<Long> medicoIdsSeleccionados = especialidadDTO.getMedicoIds();
+
+        model.addAttribute("especialidadDTO", especialidadDTO);
+        model.addAttribute("medicos", medicos);
+        model.addAttribute("medicoIdsSeleccionados", medicoIdsSeleccionados);
+
+        return "especialidad/editar";
+    }
+
+
+    @PostMapping("/especialidad/actualizar")
+    public String actualizarEspecialidad(@ModelAttribute EspecialidadDTO especialidadDTO) {
+        especialidadServicio.actualizarEspecialidad(especialidadDTO);
+        return "redirect:/especialidad";
+    }
+
 }
 
