@@ -44,6 +44,11 @@
                     <a th:href="@{/especialidad}">Especialidades Médicas</a>
                 </li>
 
+                <!-- Botón de Especialidades Médicas -->
+                <li>
+                    <a th:href="@{/horario}">Horarios</a>
+                </li>
+
                 <!-- Botón de Cerrar Sesión -->
                 <li sec:authorize="isAuthenticated()">
                     <a th:href="@{/logout}">Cerrar Sesión</a>

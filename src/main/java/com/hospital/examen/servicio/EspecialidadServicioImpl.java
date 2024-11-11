@@ -20,7 +20,6 @@ public class EspecialidadServicioImpl implements EspecialidadServicio{
     @Autowired
     private EspecialidadMapper especialidadMapper;
 
-
     @Autowired
     private EspecialidadRepositorio especialidadRepositorio;
 
@@ -104,5 +103,4 @@ public class EspecialidadServicioImpl implements EspecialidadServicio{
     public Especialidad guardarEspecialidad(Especialidad especialidad) {
         return especialidadRepositorio.save(especialidad);
     }
-
 }

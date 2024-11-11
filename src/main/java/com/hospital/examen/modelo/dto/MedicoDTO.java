@@ -19,6 +19,15 @@ public class MedicoDTO {
     private String nro_matricula;
     private String password;
     private List<Long> especialidadesIds; // Lista de IDs de especialidades
+    private List<Long> horariosIds; // Lista de IDs de los horarios
+
+    public List<Long> getHorariosIds() {
+        return horariosIds;
+    }
+
+    public void setHorariosIds(List<Long> horariosIds) {
+        this.horariosIds = horariosIds;
+    }
 
     public Long getId() {
         return id;

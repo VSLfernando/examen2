@@ -31,6 +31,17 @@ public class Medico {
     @ManyToMany(mappedBy = "medicos") // Relación bidireccional
     private List<Especialidad> especialidades;
 
+    @OneToMany(mappedBy = "medico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Horario> horarios = new ArrayList<>();
+
+    public List<Horario> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(List<Horario> horarios) {
+        this.horarios = horarios;
+    }
+
     public Long getId() {
         return id;
     }
@@ -95,6 +106,17 @@ public class Medico {
         this.especialidades = especialidades;
     }
 
+    public void addHorario(Horario horario) {
+        this.horarios.add(horario);
+        horario.setMedico(this); // Asegura que la relación bidireccional se mantenga
+    }
+
+    public void removeHorario(Horario horario) {
+        this.horarios.remove(horario);
+        horario.setMedico(null); // Asegura que la relación bidireccional se mantenga
+    }
+
+
     public Medico(String nombre, String apellido, String email, String telefono, String nro_matricula, String password) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -112,5 +134,10 @@ public class Medico {
         this.nro_matricula = nro_matricula;
         this.password = password;
         this.especialidades = especialidades;
+    }
+
+    @Override
+    public String toString() {
+        return this.nombre;  // Devolver el nombre del médico en lugar de la referencia de memoria
     }
 }

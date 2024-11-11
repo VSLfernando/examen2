@@ -15,5 +15,4 @@ public interface EspecialidadServicio {
     void actualizarEspecialidad(EspecialidadDTO especialidadDTO);
     public EspecialidadDTO obtenerPorId(Long id);
     public Especialidad guardarEspecialidad(Especialidad especialidad);
-
 }
